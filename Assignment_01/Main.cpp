@@ -7,34 +7,37 @@
 int RecursiveMultiplication(int a, int b);
 int NonRecursiveFibonacci(int n);
 void PrintFibonacciLessThan15(int n);
-int printRecursiveFactorialLessThan50(int n);
+void PrintRecursiveFactorialLessThan50(int n);
 int DynamicProgrammingFunc(int n);
 int DynamicFunction(int n);
 
 int main(int argc, char* argv[])
 {
-	//Tests:
+	//Tests:	
 	std::cout << RecursiveMultiplication(2, 5) << std::endl; // Expected result: 10
 
 	std::cout << NonRecursiveFibonacci(5) << std::endl; //Expected result: 5
 
 	PrintFibonacciLessThan15(7); //Expected result: 0 1 1 2 3 5 8 13
 
-	std::cout << std::endl;// ->Adding an extra line
+	std::cout << std::endl;
 
-	//printRecursiveFactorialLessThan50(10);//Expected result: 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1
+	PrintRecursiveFactorialLessThan50(10);//Expected result: 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1
 
+	std::cout << std::endl;
+	
+	//You can test the dynamic function here! The first one
+	//is a recursive function, and the other one is the one
+	//I wrote. You can compare them by passing in different
+	//values to both functions here:
+	std::cout << DynamicProgrammingFunc(4) << std::endl;
+	std::cout << DynamicFunction(4) << std::endl;
+	std::cout << DynamicProgrammingFunc(5) << std::endl;
+	std::cout << DynamicFunction(5) << std::endl;
 	std::cout << DynamicProgrammingFunc(6) << std::endl;
 	std::cout << DynamicFunction(6) << std::endl;
 	std::cout << DynamicProgrammingFunc(7) << std::endl;
 	std::cout << DynamicFunction(7) << std::endl;
-	std::cout << DynamicProgrammingFunc(8) << std::endl;
-	std::cout << DynamicFunction(8) << std::endl;
-	std::cout << DynamicProgrammingFunc(9) << std::endl;
-	std::cout << DynamicFunction(9) << std::endl;
-
-
-
 
 	return 0;
 }
@@ -92,17 +95,19 @@ void PrintFibonacciLessThan15(int n)
 	//Don't forget that is less than 15, so use assert if the method is being used outside the
 	//boundaries of the function.
 
-	//I wasn't sure which one to use
+	//I wasn't sure which one it was you were looking for.
 	assert(n < 8);
 	//assert(n < 15);
 	
+	//I thought it would be a good practice to use and call a function I have already written,
+	//instead of copying the code over and over again.
 	for (int i = 0; i <= n; ++i)
 	{
 		std::cout << NonRecursiveFibonacci(i) << " ";
 	}
 }
 
-int printRecursiveFactorialLessThan50(int n)
+void PrintRecursiveFactorialLessThan50(int n)
 {
 	//TODO: Create a method that will print recursive
 	//the factorial multiplication format of a number that is less than 50.
@@ -111,8 +116,22 @@ int printRecursiveFactorialLessThan50(int n)
 	//printRecursiveFactorialLessThan50(10) -> "10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1"
 	//The function just prints what is between "".
 
+	assert(n < 50);
+	
+	if (n >= 1)
+	{
+		if (n == 1)
+		{
+			std::cout << n;
+		}
 
-	return 0;
+		else
+		{
+			std::cout << n << " * ";
+		}
+
+		PrintRecursiveFactorialLessThan50(n - 1);
+	}
 }
 
 //TODO: Show with dynamic programming, the results and calls for DynamicProgrammingFunc(10)
@@ -139,7 +158,6 @@ int DynamicFunction(int n)
 	int previousNminus2 = 1;
 	int previousNminus3 = 0;
 
-	int result4 = 0;
 	int result3 = 0;
 	int result2 = 0;
 	int result1 = previousNminus3 - (previousNminus1 * previousNminus2);
@@ -150,25 +168,24 @@ int DynamicFunction(int n)
 
 	for (int i = 0; i < n - 5; ++i)
 	{
-		result4 = result3;
 		result3 = result2;
 		result2 = result1;
 		result1 = previousNminus3 - (previousNminus1 * previousNminus2);
 
 		previousNminus1 = result1;
 
-		if (i > 2)
+		if (i >= 0)
 		{
-			previousNminus2 = result3;
+			previousNminus2 = result2;
 		}
 		else
 		{
 			++previousNminus2;
 		}
 
-		if (i > 3)
+		if (i >= 1)
 		{
-			previousNminus3 = result4;
+			previousNminus3 = result3;
 		}
 		else
 		{
