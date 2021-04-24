@@ -3,6 +3,9 @@
 
 //Name: Parham Ebadi
 //StudentId: 398833
+//Grade: 100/100
+//Comments: Great assignment! Nice comments and good organization with your code!.
+
 
 int RecursiveMultiplication(int a, int b);
 int NonRecursiveFibonacci(int n);
@@ -38,6 +41,8 @@ int main(int argc, char* argv[])
 	std::cout << DynamicFunction(6) << std::endl;
 	std::cout << DynamicProgrammingFunc(7) << std::endl;
 	std::cout << DynamicFunction(7) << std::endl;
+
+	std::cout << RecursiveMultiplication(-1, 10);
 
 	return 0;
 }
