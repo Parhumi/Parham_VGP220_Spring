@@ -15,7 +15,8 @@ int foo_1(int n)
     }
     return current;
 }
-//Answer: O(log n) - Because current is being multiplied by 2 everytime the loop is happening. 
+//Answer: O(log n) - Because current is being multiplied by 2 everytime the loop is happening.
+//So, the current will be equal or greater than n more quickly!
 
 
 //TODO:
@@ -30,7 +31,8 @@ int pow_a(int m, int n)
     }
     return ret;
 }
-//Answer for pow_a: O(n)
+//Answer for pow_a: O(n) - whatever value n has is going to change the time it takes to complete 
+//the algorithm linearly. 
 
 int pow_b(int m, int n) {
     int ret = 1;
@@ -44,7 +46,8 @@ int pow_b(int m, int n) {
     }
     return ret;
 }
-//Answer for pow_b: O(log n)
+//Answer for pow_b: O(log n) - i which is equal to n in this function, is divided by 2 inside the 
+//while loop. Just like the first question, n will be equal to 0 more quickly.
 
 //TODO:
 //Question 3:
@@ -78,7 +81,9 @@ int removeDuplicates(char arr[], int n)
     }
     return len;
 }
-//Answer: O(n^2)
+//Answer: O(n^2) - There are 2 for loops inside a while loop. Big-O notation would look something
+//like this --> n * (n + n) = 2n^2, but the number 2 is not going to make any changes, so the final
+//answer would be O(n^2) which n square or n to the power of 2.
 
 //TODO:
 //Question 4: 
@@ -143,8 +148,8 @@ void DisplayArray(int* arr, int n)
 int main(int argc, char* argv[])
 {
     //Test:
-    const int number = 2;
-    const int order = 4;
+    const int number = 3;
+    const int order = 3;
     int* powerResults = Pow(number, order);
     DisplayArray(powerResults, order + 1);
     //EXPECTED RESULT: [1, 3, 9, 27]
