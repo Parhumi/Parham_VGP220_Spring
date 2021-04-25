@@ -87,11 +87,12 @@ int removeDuplicates(char arr[], int n)
 //For example: Pow(3, 3) means that is 3 ^ 3 and the returned array will be: [1, 3, 9, 27]
 int* Pow(int n, int e)
 {
-    int* arr = new int[n + 1]();
+    int order = e + 1;
+    int* arr = new int[order]();
 
-    for (int i = 0; i <= n; i++)
+    for (int i = 0; i < order; ++i)
     {
-        arr[i] = pow_b(e, i);
+        arr[i] = pow_b(n, i);
     }
 
     return arr;
@@ -104,11 +105,20 @@ int* Pow(int n, int e)
 void DisplayArray(int* arr, int n)
 {
     std::cout << "[ ";
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; ++i)
     {
         std::cout << arr[i];
+
+        if (i == n - 1)
+        {
+            std::cout << " ";
+        }
+        else
+        {
+            std::cout << ", ";
+        }
     }
-    std::cout << " ]" << std::endl;
+    std::cout << "]" << std::endl;
 }
 
 //TODO: This question is optional. It's bonus if you don't search or copy anything from the internet.
@@ -133,8 +143,8 @@ void DisplayArray(int* arr, int n)
 int main(int argc, char* argv[])
 {
     //Test:
-    const int number = 3;
-    const int order = 3;
+    const int number = 2;
+    const int order = 4;
     int* powerResults = Pow(number, order);
     DisplayArray(powerResults, order + 1);
     //EXPECTED RESULT: [1, 3, 9, 27]
