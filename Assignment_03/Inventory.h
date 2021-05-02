@@ -122,6 +122,30 @@ public:
 			return;
 		}
 
+		//if (newItem.type == ItemType::Charm && newItem.name == "Expansion")
+		//{
+		//	int newMaxSlots = mMaxSlots + 5;
+
+		//	Item* tempInventory = new Item[newMaxSlots];
+		//	tempInventory = mInventory;
+
+		//	for (int i = 0; i < mMaxSlots; ++i)
+		//	{
+		//		tempInventory[i] = mInventory[i];
+		//	}
+		//	
+		//	delete[] mInventory;
+
+		//	mInventory = tempInventory;
+		//	mMaxSlots = newMaxSlots;
+
+		//	for (int i = 0; i < mMaxSlots; ++i)
+		//	{
+		//		mInventory[i] = tempInventory[i];
+		//	}
+		//	return;
+		//}
+
 		if (index != -1)
 		{
 			int sum = mInventory[index].quantity + newItem.quantity;

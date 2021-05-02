@@ -3,7 +3,7 @@
 
 int main()
 {
-	Item hps{ "Healing Potion", 50, ItemType::Potion };
+	Item hps{ "Healing Potion", 12, ItemType::Potion };
 	Item poisonPotion{ "Poison Potion", 5, ItemType::Potion };
 	Item sword{ "Excalibur", 1, ItemType::Weapon };
 	Item shield{ "DragHorn Shield", 2, ItemType::Shield };
@@ -14,7 +14,7 @@ int main()
 
 
 	Inventory inventory_1; //Testing default constructor
-	Inventory inventory_2(3); //Testing non default constructor
+	Inventory inventory_2(5); //Testing non default constructor
 	//Testing same items add
 	inventory_2.AddItem(sword);
 
@@ -23,6 +23,7 @@ int main()
 	inventory_2.AddItem(hps);
 	inventory_2.AddItem(pick);
 	inventory_2.AddItem(hps);
+	inventory_2.AddItem(curse);
 
 	//Testing remove small quantity 
 	inventory_2.RemoveItem("Healing Potion", 3);
@@ -37,9 +38,9 @@ int main()
 
 	Inventory inventory_5;
 	//TODO: Testing copy assignment operator
-	//inventory_5 = inventory_2;
+	inventory_5 = inventory_2;
 	//TODO: Testing move assignment operator
-	//inventory_5 = std::move(inventory_4);
+	inventory_5 = std::move(inventory_4);
 
 	inventory_2.AddItem(poisonPotion);
 	inventory_2.AddItem(sword);
