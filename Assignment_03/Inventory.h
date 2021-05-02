@@ -113,41 +113,54 @@ public:
 
 		//SPECIAL CASE: If the user adds an item of type charm with the name "Expansion" your inventory
 		//should expand adding 5 more empty slots for the user.
+
 		int index = SearchItemByName(newItem.name);
-
-		if (index == -1)
+		
+		if (isFullForItem(&newItem))
 		{
-			mInventory[mSlotsOccupied] = newItem;
+			std::cout << "The inventory is full. Item will be discarded!" << std::endl;
+			return;
+		}
 
-			if (mInventory[index].quantity == 50)
+		if (index != -1)
+		{
+			int sum = mInventory[index].quantity + newItem.quantity;
+			
+			if (sum > 50)
 			{
-				mInventory[mSlotsOccupied + 1] = newItem;
-				mSlotsOccupied++;
-			}
-			else if (mInventory[index].quantity < 50)
-			{
-				int sum = mInventory[index].quantity + newItem.quantity;
-
-				if (sum > 50)
+				int remainder = sum % 50;
+				mInventory[index].quantity = 50;
+				
+				if (mSlotsOccupied >= mMaxSlots)
 				{
-					mInventory[index].quantity = 50;
-					newItem.quantity = sum % 50;
-					mInventory[mSlotsOccupied + 1] = newItem;
-					mSlotsOccupied++;
+					std::cout << "The inventory is full!" << std::endl;
+
+					if (remainder > 0)
+					{
+						std::cout << remainder << "will be discarded." << std::endl;
+					}
 				}
 				else
 				{
-					mInventory[index].quantity = sum;
+					mInventory[mSlotsOccupied] = newItem;
+					mInventory[mSlotsOccupied].quantity = remainder;
+					mSlotsOccupied++;
+					std::cout << "Adding " << newItem.quantity << " " << newItem.name << " in inventory." << "\n";
 				}
+			}
+			else
+			{
+				mInventory[index].quantity += newItem.quantity;
+				std::cout << "Adding " << newItem.quantity << " " << newItem.name << " in inventory." << "\n";
 			}
 		}
 		else
 		{
-
+			mInventory[mSlotsOccupied] = newItem;
+			mSlotsOccupied++;
+			std::cout << "Adding " << newItem.quantity << " " << newItem.name << " in inventory." << "\n";
 		}
-			
-		SearchItemByNameLessThan50(newItem.name);
-		std::cout << "Adding " << newItem.quantity << " " << newItem.name << " in inventory." << "\n";
+
 	}
 
 	void RemoveItem(std::string itemName, int quantity)
@@ -160,6 +173,23 @@ public:
 		//[ HP 50 ] [ HP 30 ] [  ] [  ] [  ] //You tried to remove 80 HP from the inventory
 		//[ HP 30 ] [  ] [  ] [  ] [  ] //You just remove from one slot.
 
+		int index = SearchItemByName(itemName);
+
+		if (index != -1)
+		{
+			int result = mInventory[index].quantity - quantity;
+			mInventory[index].quantity = result;
+
+			if (result <= 0)
+			{
+				for (int i = index; i < mSlotsOccupied - 1; ++i)
+				{
+					mInventory[i] = mInventory[i + 1];
+				}
+				mSlotsOccupied--;
+			}
+		}
+
 		std::cout << "Removing " << quantity << " " << itemName << " from inventory." << "\n";
 
 		//SPECIAL CASE: If the user removes the charm Expansion from the inventory, your inventory 
@@ -171,7 +201,21 @@ public:
 		// TODO: Search for the item and if it exists, return this item and remove one from the inventory
 		// otherwise, return nullptr.
 		// The user is just allowed to use the Types: Posion and Utility.
-		std::cout << "Using " << itemName << "\n";
+
+		int index = SearchItemByName(itemName);
+
+		if (index != -1 && (mInventory[index].type == ItemType::Utility || mInventory[index].type == ItemType::Potion))
+		{
+			Item* newItem = new Item(mInventory[index]); 
+			RemoveItem(itemName, 1);
+			std::cout << "Using " << itemName << "\n";
+			return newItem;
+		}
+		else
+		{
+			return nullptr;
+		}
+
 	}
 private:
 	//Array of Items
@@ -182,7 +226,7 @@ private:
 	uint32_t mSlotsOccupied;
 
 
-	//This method seaches for the item inside the Inventory and if it finds the item with less than
+	//This method searches for the item inside the Inventory and if it finds the item with less than
 	//50 as quantity, it returns the index of the item inside the inventory array, otherwise, returns -1.
 	int SearchItemByNameLessThan50(std::string target) const
 	{

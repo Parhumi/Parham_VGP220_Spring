@@ -3,7 +3,7 @@
 
 int main()
 {
-	Item hps{ "Healing Potion", 12, ItemType::Potion };
+	Item hps{ "Healing Potion", 50, ItemType::Potion };
 	Item poisonPotion{ "Poison Potion", 5, ItemType::Potion };
 	Item sword{ "Excalibur", 1, ItemType::Weapon };
 	Item shield{ "DragHorn Shield", 2, ItemType::Shield };
@@ -14,19 +14,21 @@ int main()
 
 
 	Inventory inventory_1; //Testing default constructor
-	Inventory inventory_2(10); //Testing non default constructor
+	Inventory inventory_2(3); //Testing non default constructor
 	//Testing same items add
+	inventory_2.AddItem(sword);
+
 	inventory_2.AddItem(hps);
+	inventory_2.AddItem(pick);
 	inventory_2.AddItem(hps);
-	inventory_2.AddItem(hps);
-	inventory_2.AddItem(hps);
+	inventory_2.AddItem(pick);
 	inventory_2.AddItem(hps);
 
 	//Testing remove small quantity 
 	inventory_2.RemoveItem("Healing Potion", 3);
 	//Testing remove big quantity 
-	inventory_2.RemoveItem("Healing Potion", 60);
-
+	inventory_2.RemoveItem("Healing Potion", 30);
+	inventory_2.UseItem("Lock Pick");
 
 	//Testing Copy Constructor
 	Inventory inventory_3(inventory_2);
