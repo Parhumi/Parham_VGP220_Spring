@@ -6,6 +6,7 @@
 class Inventory
 {
 public:
+	//COMMENT: Use the initialization list more often.
 	Inventory()
 	{
 		//TODO: Implement a default constructor for the Inventory class where the max number of slots
@@ -14,7 +15,7 @@ public:
 		mInventory = new Item[mMaxSlots];
 		mSlotsOccupied = 0;
 	}
-
+	//COMMENT: Initialization list for mSlotsOccupied.
 	Inventory(uint32_t capacity) : mMaxSlots(capacity)
 	{
 		//TODO: Implement a non default constructor for the Inventory class where 
@@ -22,7 +23,9 @@ public:
 		mInventory = new Item[capacity];
 		mSlotsOccupied = 0;
 	}
-
+	
+	//COMMENT: You don't need to loop through the mMaxSlots. You just want to copy mSlotsOccupied. What is not 
+	//occupied you should not care.
 	Inventory(const Inventory& other)
 	{
 		//TODO: Implement a copy constructor for this class. Avoid shallow copy.
@@ -37,6 +40,7 @@ public:
 		mSlotsOccupied = other.mSlotsOccupied;		
 	}
 
+	//ERROR: -1. other.mMaxSlots should go to a state that does not make sense, like for example: 0
 	Inventory(Inventory&& other) noexcept
 	{
 		//TODO: Implement a move constructor for this class. Reset to a default state the other inventory.
@@ -49,12 +53,14 @@ public:
 		mSlotsOccupied = 0;
 	}
 
+	//ERROR: -2. You forgot to set mInventory = nullptr. Without this, you will have dangling pointers.
 	~Inventory()
 	{
 		//TODO: Implement a destructor for this class.
 		delete[] mInventory;
 	}
 
+	//ERROR: -2. You should check first if they are equal and just copy otherwise.
 	//TODO: Implement a copy assignment operator
 	Inventory& operator=(const Inventory& other)
 	{
@@ -71,6 +77,8 @@ public:
 		return *this;
 	}
 
+	//ERROR: -2. You should check first if they are equal and just move otherwise.
+	//Also, make other.mMaxSlots to receive an empty state(An number that doesn't make sense).
 	//TODO: Implement a move assignment operator
 	Inventory& operator=(Inventory&& other) noexcept
 	{
@@ -90,6 +98,56 @@ public:
 
 		return *this;
 	}
+
+	//COMMENT: Remove commented code in order to improve redability.
+	//ERROR: -2. The addItem works fine but does not deals with special case.
+	//Check the commented code below.
+	//void AddItem(Item newItem)
+	//{
+	//	if (!isFullForItem(&newItem))
+	//	{
+	//		int slotIndex = SearchItemByNameLessThan50(newItem.name);
+	//		//I have this Item in inventory
+	//		if (slotIndex != -1)
+	//		{
+	//			int futureQuantity = mInventory[slotIndex].quantity + newItem.quantity;
+	//			if (futureQuantity > 50)
+	//			{
+	//				newItem.quantity = futureQuantity - 50;
+	//				mInventory[slotIndex].quantity = 50;
+	//				mInventory[mSlotsOccupied] = newItem;
+	//				mSlotsOccupied++;
+	//				return;
+	//			}
+
+	//			mInventory[slotIndex].quantity += newItem.quantity;
+	//			return;
+	//		}
+	//		//Inserting for the first time
+	//		else
+	//		{
+	//			//Expanding inventory;
+	//			if ((newItem.type == ItemType::Charm) && (newItem.name.compare("Expansion") == 0))
+	//			{
+	//				Item* temp = mInventory;
+	//				mMaxSlots += 5;
+	//				mInventory = new Item[mMaxSlots];
+	//				for (int i = 0; i < mSlotsOccupied; ++i)
+	//				{
+	//					mInventory[i] = temp[i];
+	//				}
+	//				delete[] temp;
+	//				temp = nullptr;
+	//			}
+
+	//			//After expansion, insert.
+	//			mInventory[mSlotsOccupied] = newItem;
+	//			mSlotsOccupied++;
+	//		}
+	//	}
+	//	std::cout << "Adding " << newItem.quantity << " " << newItem.name << " in inventory." << "\n";
+	//}
+
 
 	void AddItem(Item newItem)
 	{

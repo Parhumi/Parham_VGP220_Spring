@@ -1,5 +1,9 @@
 #include <iostream>
 
+//Grade: 100/100
+//Amazing job! Congrats!
+
+
 //TODO:  
 //Question 1:
 //How much time does the following method take? Use the big-O notation in terms
@@ -148,7 +152,7 @@ void DisplayArray(int* arr, int n)
 int main(int argc, char* argv[])
 {
     //Test:
-    const int number = 3;
+    const int number = 4;
     const int order = 3;
     int* powerResults = Pow(number, order);
     DisplayArray(powerResults, order + 1);

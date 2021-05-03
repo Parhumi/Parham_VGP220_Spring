@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Inventory.h"
 
+//Grade: 91/100. Congrats!
+
 int main()
 {
 	Item hps{ "Healing Potion", 12, ItemType::Potion };
@@ -19,10 +21,13 @@ int main()
 	inventory_2.AddItem(sword);
 
 	inventory_2.AddItem(hps);
-	inventory_2.AddItem(pick);
+	//inventory_2.AddItem(pick);
 	inventory_2.AddItem(hps);
-	inventory_2.AddItem(pick);
+	//inventory_2.AddItem(pick);
 	inventory_2.AddItem(hps);
+	inventory_2.AddItem(hps);
+	inventory_2.AddItem(hps);
+
 	inventory_2.AddItem(curse);
 
 	//Testing remove small quantity 
