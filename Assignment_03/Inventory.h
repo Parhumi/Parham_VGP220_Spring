@@ -58,6 +58,7 @@ public:
 	{
 		//TODO: Implement a destructor for this class.
 		delete[] mInventory;
+		//mInventory = nullptr;
 	}
 
 	//ERROR: -2. You should check first if they are equal and just copy otherwise.
