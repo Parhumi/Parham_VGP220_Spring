@@ -112,6 +112,13 @@ public:
 	void DisplayList()
 	{
 		// TODO: 1
+		Node* currentNode = mHead;
+
+		while (currentNode->next != nullptr)
+		{
+			std::cout << currentNode->data << std::endl;
+			currentNode = currentNode->next;
+		}
 	}
 
 	//Displays all the elements of the linked list in reverse order

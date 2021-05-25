@@ -22,11 +22,11 @@ int main(int argc, char* argv[])
 	myList.Insert(10);
 
 	myList.DisplayList();
-	myList.DisplayReverseList();
-	myList.ModifyContent(5, 30);
-	myList.DisplayList();
-	myList.ClearList();
-	myList.DisplayList();
+	//myList.DisplayReverseList();
+	//myList.ModifyContent(5, 30);
+	//myList.DisplayList();
+	//myList.ClearList();
+	//myList.DisplayList();
 
 
 	//Queue test

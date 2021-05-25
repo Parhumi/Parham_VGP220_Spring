@@ -7,6 +7,7 @@ template<typename T>
 class Queue 
 {
 public:
+	Queue() {}
 	Queue(int capacity) : mCapacity(capacity)
 	{
 		mData = new T[capacity];
