@@ -62,7 +62,21 @@ public:
 		//Heaps RemoveMax: Make the first element to receive the last
 		//element from your array. After this, Heapfy.
 		//If the queue is empty, return mEmptyValue
-		return mEmptyValue;
+		
+		if (mSize > 0)
+		{
+			Data temp = mDataArray[0];
+
+			mDataArray[0] = mDataArray[mSize - 1];
+			mSize--;
+
+			Heapify(0);
+			return temp;
+		}
+		else
+		{
+			return mEmptyValue;
+		}
 	}
 
 	int GetSize() const 
@@ -93,13 +107,44 @@ private:
 		*b = temp;
 	}
 
-	void Heapfy(int index) 
+	void Heapify(int index) 
 	{
 		//TODO_5: Implement Heapfy
 		//
 		//Remember:
 		//Heapfy: In a loop, checks which one is bigger in priority between left and right. and select.
 		//Then compares with it's priority. If parent priority is smaller, Swap.
+		int savedIndex = 0;
+		
+		for (int i = index; i < mSize - 1; i = savedIndex)
+		{
+			int leftIndex = GetLeft(i);
+			int rightIndex = GetRight(i);
+
+			if (leftIndex > mSize && rightIndex > mSize)
+			{
+				break;
+			}
+
+			if (rightIndex > mSize || mDataArray[leftIndex].priority > mDataArray[rightIndex].priority)
+			{
+				savedIndex = leftIndex;
+
+				if (mDataArray[leftIndex].priority > mDataArray[i].priority)
+				{
+					swap(&mDataArray[leftIndex], &mDataArray[i]);
+				}
+			}
+			else
+			{
+				savedIndex = rightIndex;
+
+				if (mDataArray[rightIndex].priority > mDataArray[i].priority)
+				{
+					swap(&mDataArray[rightIndex], &mDataArray[i]);
+				}
+			}			
+		}
 	}
 
 	Data* mDataArray;

@@ -21,21 +21,21 @@ int main(int argc, char* argv[])
 	priorityQueue.Enqueue({ 63, "Caroline Wilson" });
 	priorityQueue.Enqueue({ 84, "Chloe Marshall" });
 	
-	//PriorityQueue<std::string>::Data first5[5] =
-	//{
-	//	priorityQueue.Dequeue(),
-	//	priorityQueue.Dequeue(),
-	//	priorityQueue.Dequeue(),
-	//	priorityQueue.Dequeue(),
-	//	priorityQueue.Dequeue()
-	//};
+	PriorityQueue<std::string>::Data first5[5] =
+	{
+		priorityQueue.Dequeue(),
+		priorityQueue.Dequeue(),
+		priorityQueue.Dequeue(),
+		priorityQueue.Dequeue(),
+		priorityQueue.Dequeue()
+	};
 
 
-	//std::cout << "Top 5 students and grades:\n";
-	//for (int i = 0; i < 5; ++i) 
-	//{
-	//	std::cout << i+1 << ") " << first5->data << " " << first5->priority << "\n";
-	//}
+	std::cout << "Top 5 students and grades:\n";
+	for (int i = 0; i < 5; ++i) 
+	{
+		std::cout << i+1 << ") " << first5[i].data << " " << first5[i].priority << "\n";
+	}
 	//EXPECTED:
 	//Top 5 students and grades:
 	//1) Michael Wastren Jr. 100
@@ -47,8 +47,8 @@ int main(int argc, char* argv[])
 
 	//EXPECTED:
 	//Clear the queue with no error.
-	//for (int i = 0; i < 6; ++i)
-	//{
-	//	priorityQueue.Dequeue();
-	//}
+	for (int i = 0; i < 6; ++i)
+	{
+		priorityQueue.Dequeue();
+	}
 }
