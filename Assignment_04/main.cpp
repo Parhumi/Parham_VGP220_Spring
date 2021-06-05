@@ -2,6 +2,8 @@
 #include "LinkedList.h"
 #include "Queue.h"
 
+//Grade: 60/100
+//Comment: Missed 4 implementations.
 
 //TESTS
 int main(int argc, char* argv[])
